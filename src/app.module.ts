@@ -25,6 +25,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './database/mongoose-config.service';
 import { DatabaseConfig } from './database/config/database-config.type';
 import { HealthModule } from './health/health.module';
+import { AuthAzureAdModule } from './auth-azure-ad/auth-azure-ad.module';
 
 // <database-block>
 const infrastructureDatabaseModule = (databaseConfig() as DatabaseConfig)
@@ -82,6 +83,7 @@ const infrastructureDatabaseModule = (databaseConfig() as DatabaseConfig)
     FilesModule,
     AuthModule,
     AuthGoogleModule,
+    AuthAzureAdModule,
     SessionModule,
     MailModule,
     MailerModule,

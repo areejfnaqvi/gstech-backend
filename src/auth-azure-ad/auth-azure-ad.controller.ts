@@ -1,12 +1,8 @@
 import {
-    Body,
     Controller,
     Get,
-    Header,
     HttpCode,
     HttpStatus,
-    Post,
-    Redirect,
     Req,
     Res,
 } from '@nestjs/common';
@@ -20,9 +16,7 @@ import { Request, Response } from 'express';
     version: '1',
 })
 export class AuthAzureAdController {
-    constructor(
-        private readonly authAzureAdService: AuthAzureAdService,
-    ) {}
+    constructor(private readonly authAzureAdService: AuthAzureAdService) {}
 
     @Get('login')
     @HttpCode(HttpStatus.OK)
@@ -43,19 +37,24 @@ export class AuthAzureAdController {
                     .send('Authorization code not found');
             }
 
-            const tokenResponse = await this.authAzureAdService.getToken(authorizationCode as string);
-            const nameParts = tokenResponse.idTokenClaims.name.trim().split(' ');
+            const tokenResponse = await this.authAzureAdService.getToken(
+                authorizationCode as string,
+            );
+            const nameParts = tokenResponse.idTokenClaims.name
+                .trim()
+                .split(' ');
             const lastName = nameParts.pop();
             const firstName = nameParts.join(' ').trim();
             const socialData = {
                 id: tokenResponse.idTokenClaims.oid,
                 email: tokenResponse.idTokenClaims.email,
                 firstName,
-                lastName
-            }
+                lastName,
+            };
 
-            const user = await this.authAzureAdService.validateSocialLogin(socialData);
-            
+            const user =
+                await this.authAzureAdService.validateSocialLogin(socialData);
+
             res.cookie('authToken', user.token, {
                 httpOnly: true,
                 secure: true,
@@ -65,9 +64,11 @@ export class AuthAzureAdController {
                 httpOnly: true,
                 secure: true,
                 maxAge: 3600000,
-            })
-            
-            return res.redirect(`${process.env.FRONTEND_DOMAIN}/form?user=${encodeURIComponent(user.user.email!)}`);
+            });
+
+            return res.redirect(
+                `${process.env.FRONTEND_DOMAIN}/form?user=${encodeURIComponent(user.user.email!)}`,
+            );
         } catch (error) {
             return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
                 message: 'Authentication failed',

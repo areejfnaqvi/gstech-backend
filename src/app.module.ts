@@ -24,71 +24,85 @@ import { MailerModule } from './mailer/mailer.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './database/mongoose-config.service';
 import { DatabaseConfig } from './database/config/database-config.type';
+import { CareQuestionsModule } from './entities/care-questions/care-questions.module';
 import { HealthModule } from './health/health.module';
 import { AuthAzureAdModule } from './auth-azure-ad/auth-azure-ad.module';
+import { CareFormDataModule } from './entities/care-form-data/care-form-data.module';
+import { CareQuestionOptionsModule } from './entities/care-question-options/care-question-options.module';
 
 // <database-block>
 const infrastructureDatabaseModule = (databaseConfig() as DatabaseConfig)
-  .isDocumentDatabase
-  ? MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
-    })
-  : TypeOrmModule.forRootAsync({
-      useClass: TypeOrmConfigService,
-      dataSourceFactory: async (options: DataSourceOptions) => {
-        return new DataSource(options).initialize();
-      },
-    });
+    .isDocumentDatabase
+    ? MongooseModule.forRootAsync({
+          useClass: MongooseConfigService,
+      })
+    : TypeOrmModule.forRootAsync({
+          useClass: TypeOrmConfigService,
+          dataSourceFactory: async (options: DataSourceOptions) => {
+              return new DataSource(options).initialize();
+          },
+      });
 // </database-block>
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [
-        databaseConfig,
-        authConfig,
-        appConfig,
-        mailConfig,
-        fileConfig,
-        googleConfig,
-      ],
-      envFilePath: ['.env'],
-    }),
-    infrastructureDatabaseModule,
-    I18nModule.forRootAsync({
-      useFactory: (configService: ConfigService<AllConfigType>) => ({
-        fallbackLanguage: configService.getOrThrow('app.fallbackLanguage', {
-          infer: true,
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            load: [
+                databaseConfig,
+                authConfig,
+                appConfig,
+                mailConfig,
+                fileConfig,
+                googleConfig,
+            ],
+            envFilePath: ['.env'],
         }),
-        loaderOptions: { path: path.join(__dirname, '/i18n/'), watch: true },
-      }),
-      resolvers: [
-        {
-          use: HeaderResolver,
-          useFactory: (configService: ConfigService<AllConfigType>) => {
-            return [
-              configService.get('app.headerLanguage', {
-                infer: true,
-              }),
-            ];
-          },
-          inject: [ConfigService],
-        },
-      ],
-      imports: [ConfigModule],
-      inject: [ConfigService],
-    }),
-    UsersModule,
-    FilesModule,
-    AuthModule,
-    AuthGoogleModule,
-    AuthAzureAdModule,
-    SessionModule,
-    MailModule,
-    MailerModule,
-    HomeModule,
-    HealthModule,
-  ],
+        infrastructureDatabaseModule,
+        I18nModule.forRootAsync({
+            useFactory: (configService: ConfigService<AllConfigType>) => ({
+                fallbackLanguage: configService.getOrThrow(
+                    'app.fallbackLanguage',
+                    {
+                        infer: true,
+                    },
+                ),
+                loaderOptions: {
+                    path: path.join(__dirname, '/i18n/'),
+                    watch: true,
+                },
+            }),
+            resolvers: [
+                {
+                    use: HeaderResolver,
+                    useFactory: (
+                        configService: ConfigService<AllConfigType>,
+                    ) => {
+                        return [
+                            configService.get('app.headerLanguage', {
+                                infer: true,
+                            }),
+                        ];
+                    },
+                    inject: [ConfigService],
+                },
+            ],
+            imports: [ConfigModule],
+            inject: [ConfigService],
+        }),
+        UsersModule,
+        FilesModule,
+        AuthModule,
+        AuthGoogleModule,
+        AuthAzureAdModule,
+        SessionModule,
+        MailModule,
+        MailerModule,
+        HomeModule,
+        HealthModule,
+        CareFormDataModule,
+        CareQuestionsModule,
+        CareQuestionOptionsModule,
+    ],
 })
 export class AppModule {}

@@ -13,15 +13,21 @@ export class AuthAzureAdService {
                 clientId: String(process.env.AZURE_AD_CLIENT_ID),
                 authority: `https://login.microsoftonline.com/${process.env.AZURE_AD_TENANT_ID}`,
                 clientSecret: String(process.env.AZURE_AD_CLIENT_SECRET),
-            }
+            },
         });
     }
 
     async getAuthUrl(): Promise<string> {
         const authCodeUrlParameters = {
-            scopes: ['openid', 'profile', 'email', 'offline_access', 'User.Read'],
+            scopes: [
+                'openid',
+                'profile',
+                'email',
+                'offline_access',
+                'User.Read',
+            ],
             redirectUri: String(process.env.AZURE_AD_REDIRECT_URI),
-            grantType: 'authorization_code'
+            grantType: 'authorization_code',
         };
         return this.msalClient.getAuthCodeUrl(authCodeUrlParameters);
     }
@@ -33,15 +39,19 @@ export class AuthAzureAdService {
                 'openid',
                 'profile',
                 'email',
-                'offline_access', 'User.Read'
+                'offline_access',
+                'User.Read',
             ],
             redirectUri: String(process.env.AZURE_AD_REDIRECT_URI),
             grantType: 'authorization_code',
         };
         return this.msalClient.acquireTokenByCode(tokenRequest);
-    } 
+    }
 
     async validateSocialLogin(socialData: SocialInterface) {
-        return await this.authService.validateSocialLogin('azure-ad', socialData);
+        return await this.authService.validateSocialLogin(
+            'azure-ad',
+            socialData,
+        );
     }
 }

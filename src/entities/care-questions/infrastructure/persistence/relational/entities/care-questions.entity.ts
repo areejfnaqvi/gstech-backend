@@ -37,14 +37,33 @@ export class CareQuestionsEntity extends EntityRelationalHelper {
     @Column()
     type: QuestionType;
 
-    @OneToMany(() => CareQuestionOptionsEntity, (option) => option.questionID)
+    @ApiPropertyOptional({
+        type: String,
+        description: 'The block that this question belongs to',
+    })
+    @Column({ nullable: true })
+    @IsOptional()
+    parentBlock?: string;
+
+    @OneToMany(() => CareQuestionOptionsEntity, (option) => option.question)
     options: CareQuestionOptionsEntity[];
 
-    @ApiPropertyOptional({ type: 'object' })
+    @ApiPropertyOptional({
+        type: 'object',
+        example: { minLength: 0, maxLength: 250, minValue: 0, maxValue: 100 },
+        description:
+            'The minimum and maximum values for the length of a string/value of a number input',
+    })
     @Column('jsonb', { nullable: true })
     constraints?: QuestionConstraints;
 
-    @ApiPropertyOptional({ type: () => [String], nullable: true })
+    @ApiPropertyOptional({
+        type: () => [String],
+        nullable: true,
+        example: ['3.3.5', '3.3.1'],
+        description:
+            'Lists the previously answered questions that this question is dependent on, if any.',
+    })
     @Column('text', { array: true, nullable: true })
     @IsOptional()
     dependentOn?: string[];

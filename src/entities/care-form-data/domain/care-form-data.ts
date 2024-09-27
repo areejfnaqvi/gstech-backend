@@ -24,7 +24,11 @@ export class CareFormData {
     @ApiProperty({ type: Number })
     '3.3.4': number;
 
-    @ApiProperty({ type: Number })
+    @ApiProperty({
+        type: Number,
+        name: 'Social Security Number',
+        example: 111223333,
+    })
     '3.3.5': number;
 
     @ApiProperty({ type: Number })

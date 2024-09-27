@@ -128,7 +128,7 @@ export class CareQuestionOptionsController {
     remove(@Param('id') id: number) {
         return this.careQuestionOptionsService.remove(id);
     }
-    
+
     @Get(':questionID')
     @ApiParam({
         name: 'questionID',
@@ -136,9 +136,11 @@ export class CareQuestionOptionsController {
         required: true,
     })
     @ApiOkResponse({
-        type: () => [CareQuestionOptions], 
+        type: () => [CareQuestionOptions],
     })
     findOptionByQuestionID(@Param('questionID') questionID: string) {
-        return this.careQuestionOptionsService.findOptionsByQuestionID(questionID);
+        return this.careQuestionOptionsService.findOptionsByQuestionID(
+            questionID,
+        );
     }
 }

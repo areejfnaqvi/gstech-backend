@@ -7,6 +7,7 @@ export enum QuestionType {
     BOOLEAN = 'boolean',
     SELECT_SINGLE = 'select_single',
     SELECT_MULTIPLE = 'select_multiple',
+    DATE = 'Date',
 }
 
 export type QuestionConstraints = {
@@ -41,13 +42,26 @@ export class CareQuestions {
     constraints?: QuestionConstraints;
 
     @ApiPropertyOptional({
+        type: String,
+        description: 'The block that this question belongs to',
+        nullable: true
+    })
+    parentBlock?: string;
+
+    @ApiPropertyOptional({
         type: () => CareQuestionOptionsEntity,
         isArray: true,
         nullable: true,
     })
     options?: CareQuestionOptionsEntity[] | null;
 
-    @ApiPropertyOptional({ type: () => [String], isArray: true, description: "Denotes if question is dependent on answer of a previous question", nullable: true })
+    @ApiPropertyOptional({
+        type: () => [String],
+        isArray: true,
+        description:
+            'Lists the previously answered questions that this question is dependent on, if any.',
+        nullable: true,
+    })
     dependentOn?: string[];
 
     @ApiProperty({ type: Date })

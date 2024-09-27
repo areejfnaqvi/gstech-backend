@@ -40,7 +40,11 @@ export class CareFormDataEntity extends EntityRelationalHelper {
     @Column({ type: Number, nullable: true })
     '3.3.4': number;
 
-    @ApiProperty({ type: Number })
+    @ApiProperty({
+        type: Number,
+        name: 'Social Security Number',
+        example: 111223333,
+    })
     @Column({ type: Number, unique: true })
     '3.3.5': number;
 

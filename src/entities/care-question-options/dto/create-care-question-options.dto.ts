@@ -1,11 +1,6 @@
-import {
-    IsNotEmpty,
-    IsString,
-} from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-import {
-    ApiProperty,
-} from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { CareQuestions } from '../../care-questions/domain/care-questions';
 
 export class CreateCareQuestionOptionsDto {

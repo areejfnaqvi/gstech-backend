@@ -16,15 +16,14 @@ import { CareQuestionsEntity } from '../../../../../care-questions/infrastructur
     name: 'care_question_options',
 })
 export class CareQuestionOptionsEntity extends EntityRelationalHelper {
-
     @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ApiProperty()
-    @Column()
-    @IsString()
-    questionID: string;
+    // @ApiProperty()
+    // @Column()
+    // @IsString()
+    // questionID: string;
 
     @ManyToOne(() => CareQuestionsEntity, (question) => question.options)
     @JoinColumn({ name: 'questionID' })

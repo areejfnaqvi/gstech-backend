@@ -10,11 +10,12 @@ import { IPaginationOptions } from '../../../../../../utils/types/pagination-opt
 
 @Injectable()
 export class CareQuestionOptionsRelationalRepository
-    implements CareQuestionOptionsRepository {
+    implements CareQuestionOptionsRepository
+{
     constructor(
         @InjectRepository(CareQuestionOptionsEntity)
         private readonly careQuestionOptionsRepository: Repository<CareQuestionOptionsEntity>,
-    ) { }
+    ) {}
 
     async create(data: CareQuestionOptions): Promise<CareQuestionOptions> {
         const persistenceModel = CareQuestionOptionsMapper.toPersistence(data);
@@ -51,7 +52,7 @@ export class CareQuestionOptionsRelationalRepository
         questionID: CareQuestionOptions['questionID'],
     ): Promise<NullableType<CareQuestionOptions>> {
         const entity = await this.careQuestionOptionsRepository.findOne({
-            where: { questionID },
+            where: { question: { questionID } },
         });
 
         return entity ? CareQuestionOptionsMapper.toDomain(entity) : null;
@@ -85,10 +86,12 @@ export class CareQuestionOptionsRelationalRepository
         await this.careQuestionOptionsRepository.delete(id);
     }
 
-    async findOptionsByQuestionId(questionID: CareQuestionOptions['questionID']): Promise<CareQuestionOptions[]> {
+    async findOptionsByQuestionId(
+        questionID: CareQuestionOptions['questionID'],
+    ): Promise<CareQuestionOptions[]> {
         const rawOptions = await this.careQuestionOptionsRepository.find({
-          where: { questionID },
+            where: { question: { questionID } },
         });
         return rawOptions.map(CareQuestionOptionsMapper.toDomain);
-      }
+    }
 }

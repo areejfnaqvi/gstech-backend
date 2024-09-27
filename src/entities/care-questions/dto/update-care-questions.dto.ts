@@ -24,6 +24,10 @@ export class UpdateCareQuestionsDto extends PartialType(
 
     @ApiPropertyOptional()
     @IsOptional()
+    parentBlock?: string;
+
+    @ApiPropertyOptional()
+    @IsOptional()
     constraints?: QuestionConstraints;
 
     @ApiPropertyOptional()

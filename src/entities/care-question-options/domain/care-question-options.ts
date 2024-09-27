@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { CareQuestions } from '../../care-questions/domain/care-questions';
 
 export class CareQuestionOptions {
-
     @ApiProperty({ type: Number })
     id: number;
 

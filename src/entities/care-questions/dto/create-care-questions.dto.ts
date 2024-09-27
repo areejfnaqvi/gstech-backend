@@ -3,6 +3,7 @@ import { QuestionConstraints, QuestionType } from '../domain/care-questions';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateCareQuestionsDto {
+
     @ApiProperty({ type: String, example: 'Current First Name' })
     @IsString()
     @IsNotEmpty()
@@ -20,6 +21,10 @@ export class CreateCareQuestionsDto {
     })
     @IsNotEmpty()
     type: QuestionType;
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    parentBlock?: string;
 
     @ApiPropertyOptional()
     @IsOptional()

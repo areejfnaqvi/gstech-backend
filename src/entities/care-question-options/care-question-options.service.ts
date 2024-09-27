@@ -53,6 +53,8 @@ export class CareQuestionOptionsService {
     }
 
     findOptionsByQuestionID(questionID: CareQuestionOptions['questionID']) {
-        return this.careQuestionOptionsRepository.findOptionsByQuestionId(questionID);
+        return this.careQuestionOptionsRepository.findOptionsByQuestionId(
+            questionID,
+        );
     }
 }

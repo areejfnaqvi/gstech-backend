@@ -4,6 +4,7 @@ import { CareQuestionsEntity } from '../entities/care-questions.entity';
 export class CareQuestionsMapper {
     static toDomain(raw: CareQuestionsEntity): CareQuestions {
         const domainEntity = new CareQuestions();
+        domainEntity.parentBlock = raw.parentBlock;
         domainEntity.description = raw.description;
         domainEntity.questionID = raw.questionID;
         domainEntity.createdAt = raw.createdAt;
@@ -19,6 +20,7 @@ export class CareQuestionsMapper {
 
     static toPersistence(domainEntity: CareQuestions): CareQuestionsEntity {
         const persistenceEntity = new CareQuestionsEntity();
+        persistenceEntity.parentBlock = domainEntity.parentBlock;
         persistenceEntity.description = domainEntity.description;
         persistenceEntity.questionID = domainEntity.questionID;
         persistenceEntity.createdAt = domainEntity.createdAt;

@@ -6,10 +6,10 @@ export class CareQuestionOptionsMapper {
     static toDomain(raw: CareQuestionOptionsEntity): CareQuestionOptions {
         const domainEntity = new CareQuestionOptions();
         domainEntity.option = raw.option;
-        domainEntity.questionID = raw.question.questionID;
         domainEntity.id = raw.id;
         domainEntity.createdAt = raw.createdAt;
         domainEntity.updatedAt = raw.updatedAt;
+        domainEntity.questions = raw.questions;
 
         return domainEntity;
     }
@@ -19,14 +19,12 @@ export class CareQuestionOptionsMapper {
     ): CareQuestionOptionsEntity {
         const persistenceEntity = new CareQuestionOptionsEntity();
         persistenceEntity.option = domainEntity.option;
-        const questionEntity = new CareQuestionsEntity();
-        questionEntity.questionID = domainEntity.questionID;
-        persistenceEntity.question = questionEntity;
         if (domainEntity.id) {
             persistenceEntity.id = domainEntity.id;
         }
         persistenceEntity.createdAt = domainEntity.createdAt;
         persistenceEntity.updatedAt = domainEntity.updatedAt;
+        persistenceEntity.questions = domainEntity.questions ? domainEntity.questions : [];
 
         return persistenceEntity;
     }

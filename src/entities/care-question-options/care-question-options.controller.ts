@@ -87,17 +87,17 @@ export class CareQuestionOptionsController {
         return this.careQuestionOptionsService.findOne(id);
     }
 
-    @Get(':questionID')
+    @Get(':optionID')
     @ApiParam({
-        name: 'questionID',
-        type: String,
+        name: 'optionID',
+        type: Number,
         required: true,
     })
     @ApiOkResponse({
         type: CareQuestionOptions,
     })
-    findByQuestionID(@Param('questionID') questionID: string) {
-        return this.careQuestionOptionsService.findByQuestionID(questionID);
+    findByOptionID(@Param('optionID') optionID: number) {
+        return this.careQuestionOptionsService.findByOptionID(optionID);
     }
 
     @Patch(':id')
@@ -127,20 +127,5 @@ export class CareQuestionOptionsController {
     })
     remove(@Param('id') id: number) {
         return this.careQuestionOptionsService.remove(id);
-    }
-
-    @Get(':questionID')
-    @ApiParam({
-        name: 'questionID',
-        type: String,
-        required: true,
-    })
-    @ApiOkResponse({
-        type: () => [CareQuestionOptions],
-    })
-    findOptionByQuestionID(@Param('questionID') questionID: string) {
-        return this.careQuestionOptionsService.findOptionsByQuestionID(
-            questionID,
-        );
     }
 }

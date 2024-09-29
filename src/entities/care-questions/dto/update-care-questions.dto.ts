@@ -2,6 +2,7 @@ import { ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { CreateCareQuestionsDto } from './create-care-questions.dto';
 import { IsOptional } from 'class-validator';
 import { QuestionConstraints, QuestionType } from '../domain/care-questions';
+import { CareQuestionOptionsEntity } from '../../care-question-options/infrastructure/persistence/relational/entities/care-question-options.entity';
 
 export class UpdateCareQuestionsDto extends PartialType(
     CreateCareQuestionsDto,
@@ -32,5 +33,13 @@ export class UpdateCareQuestionsDto extends PartialType(
 
     @ApiPropertyOptional()
     @IsOptional()
-    dependentOn?: string[];
+    options?: CareQuestionOptionsEntity[];
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    dependentOn?: 'jsonb';
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    careStatus?: string;
 }

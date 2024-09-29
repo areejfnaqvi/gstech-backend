@@ -22,10 +22,14 @@ export abstract class CareQuestionsRepository {
         id: CareQuestions['id'],
     ): Promise<NullableType<CareQuestions>>;
 
+    abstract findByCareStatus(
+        careStatus: CareQuestions['careStatus'],
+    ): Promise<NullableType<CareQuestions[]>>;
+
     abstract update(
         questionID: CareQuestions['questionID'],
         payload: DeepPartial<CareQuestions>,
     ): Promise<CareQuestions | null>;
 
-    abstract remove(questionID: CareQuestions['questionID']): Promise<void>;
+    abstract remove(questionID: CareQuestions['id']): Promise<void>;
 }

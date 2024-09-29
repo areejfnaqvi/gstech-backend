@@ -48,6 +48,14 @@ export class CareQuestionsRelationalRepository
         return entity ? CareQuestionsMapper.toDomain(entity) : null;
     }
 
+    async findByCareStatus(
+        careStatus: CareQuestions['careStatus'],
+    ): Promise<NullableType<CareQuestions[]>> {
+        return await this.careQuestionsRepository.find({
+            where: { careStatus },
+        });
+    }
+
     async findByID(
         id: CareQuestions['id'],
     ): Promise<NullableType<CareQuestions>> {
@@ -82,7 +90,7 @@ export class CareQuestionsRelationalRepository
         return CareQuestionsMapper.toDomain(updatedEntity);
     }
 
-    async remove(questionID: CareQuestions['questionID']): Promise<void> {
-        await this.careQuestionsRepository.delete(questionID);
+    async remove(id: CareQuestions['id']): Promise<void> {
+        await this.careQuestionsRepository.delete(id);
     }
 }

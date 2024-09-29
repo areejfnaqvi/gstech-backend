@@ -102,6 +102,20 @@ export class CareQuestionsController {
         return this.careQuestionsService.findByID(id);
     }
 
+    @Get(':careStatus')
+    @ApiParam({
+        name: 'careStatus',
+        type: String,
+        required: true,
+    })
+    @ApiOkResponse({
+        type: CareQuestions,
+    })
+    @HttpCode(HttpStatus.OK)
+    findByCareStatus(@Param('careStatus') careStatus: string) {
+        return this.careQuestionsService.findByCareStatus(careStatus);
+    }
+
     @Patch(':questionID')
     @ApiParam({
         name: 'questionID',
@@ -122,14 +136,14 @@ export class CareQuestionsController {
         );
     }
 
-    @Delete(':questionID')
+    @Delete(':id')
     @ApiParam({
-        name: 'questionID',
+        name: 'id',
         type: String,
         required: true,
     })
     @HttpCode(HttpStatus.NO_CONTENT)
-    remove(@Param('questionID') questionID: CareQuestions['questionID']) {
-        return this.careQuestionsService.remove(questionID);
+    remove(@Param('id') id: CareQuestions['id']) {
+        return this.careQuestionsService.remove(id);
     }
 }

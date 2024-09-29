@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { QuestionConstraints, QuestionType } from '../domain/care-questions';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { CareQuestionOptionsEntity } from '../../care-question-options/infrastructure/persistence/relational/entities/care-question-options.entity';
 
 export class CreateCareQuestionsDto {
 
@@ -32,5 +33,13 @@ export class CreateCareQuestionsDto {
 
     @ApiPropertyOptional()
     @IsOptional()
-    dependentOn?: string[];
+    options?: CareQuestionOptionsEntity[];
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    dependentOn?: 'jsonb';
+
+    @ApiPropertyOptional()
+    @IsOptional()
+    careStatus?: string;
 }

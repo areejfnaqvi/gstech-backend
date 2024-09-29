@@ -15,15 +15,3 @@ export class QueryAllCareQuestions {
     @IsOptional()
     limit?: number;
 }
-
-export class QueryCareQuestion {
-    @ApiPropertyOptional({ type: String })
-    @IsOptional()
-    @IsString()
-    questionID?: string;
-
-    @ApiPropertyOptional({ type: Number })
-    @IsOptional()
-    @IsNumber()
-    id?: number;
-}

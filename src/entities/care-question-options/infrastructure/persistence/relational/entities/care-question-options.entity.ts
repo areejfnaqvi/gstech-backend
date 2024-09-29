@@ -4,12 +4,11 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
     Column,
-    ManyToOne,
-    JoinColumn,
+    ManyToMany,
 } from 'typeorm';
 import { EntityRelationalHelper } from '../../../../../../utils/relational-entity-helper';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { CareQuestionsEntity } from '../../../../../care-questions/infrastructure/persistence/relational/entities/care-questions.entity';
 
 @Entity({
@@ -20,19 +19,18 @@ export class CareQuestionOptionsEntity extends EntityRelationalHelper {
     @PrimaryGeneratedColumn()
     id: number;
 
-    // @ApiProperty()
-    // @Column()
-    // @IsString()
-    // questionID: string;
-
-    @ManyToOne(() => CareQuestionsEntity, (question) => question.options)
-    @JoinColumn({ name: 'questionID' })
-    question: CareQuestionsEntity;
+    @ApiProperty()
+    @Column()
+    @IsNumber()
+    optionID: number;
 
     @ApiProperty()
     @Column()
     @IsString()
     option: string;
+
+    @ManyToMany(() => CareQuestionsEntity, (question) => question.options)
+    questions: CareQuestionsEntity[];
 
     @ApiProperty()
     @CreateDateColumn()

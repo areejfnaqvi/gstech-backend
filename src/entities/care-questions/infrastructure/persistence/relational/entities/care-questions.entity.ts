@@ -5,6 +5,8 @@ import {
     Column,
     PrimaryGeneratedColumn,
     OneToMany,
+    ManyToMany,
+    JoinTable,
 } from 'typeorm';
 import { EntityRelationalHelper } from '../../../../../../utils/relational-entity-helper';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
@@ -45,7 +47,12 @@ export class CareQuestionsEntity extends EntityRelationalHelper {
     @IsOptional()
     parentBlock?: string;
 
-    @OneToMany(() => CareQuestionOptionsEntity, (option) => option.question)
+    @ManyToMany(() => CareQuestionOptionsEntity, { cascade: true })
+    @JoinTable({
+        name: 'care_question_option_relations',
+        joinColumn: { name: 'questionID', referencedColumnName: 'id' },
+        inverseJoinColumn: { name: 'optionID', referencedColumnName: 'id' },
+    })
     options: CareQuestionOptionsEntity[];
 
     @ApiPropertyOptional({
@@ -64,9 +71,13 @@ export class CareQuestionsEntity extends EntityRelationalHelper {
         description:
             'Lists the previously answered questions that this question is dependent on, if any.',
     })
-    @Column('text', { array: true, nullable: true })
+    @Column('jsonb', { nullable: true })
     @IsOptional()
-    dependentOn?: string[];
+    dependentOn?: 'jsonb';
+
+    @ApiPropertyOptional({ type: String, example: "CARE Process Initiation Period" })
+    @IsOptional()
+    careStatus?: string;
 
     @ApiProperty()
     @CreateDateColumn()

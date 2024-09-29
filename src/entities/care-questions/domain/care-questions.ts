@@ -56,13 +56,15 @@ export class CareQuestions {
     options?: CareQuestionOptionsEntity[] | null;
 
     @ApiPropertyOptional({
-        type: () => [String],
-        isArray: true,
+        type: () => 'jsonb',
         description:
-            'Lists the previously answered questions that this question is dependent on, if any.',
+            'Mapping of the previously answered questions that this question is dependent on as well as the answer which prompts the question, if any.',
         nullable: true,
     })
-    dependentOn?: string[];
+    dependentOn?: 'jsonb';
+
+    @ApiPropertyOptional({ type: String, description: "CARE Status for this question" })
+    careStatus?: string;
 
     @ApiProperty({ type: Date })
     createdAt: Date;

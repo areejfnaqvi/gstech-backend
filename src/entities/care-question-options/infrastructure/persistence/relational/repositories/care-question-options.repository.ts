@@ -48,11 +48,11 @@ export class CareQuestionOptionsRelationalRepository
         return entity ? CareQuestionOptionsMapper.toDomain(entity) : null;
     }
 
-    async findByQuestionId(
-        questionID: CareQuestionOptions['questionID'],
+    async findByOptionID(
+        optionID: CareQuestionOptions['optionID'],
     ): Promise<NullableType<CareQuestionOptions>> {
         const entity = await this.careQuestionOptionsRepository.findOne({
-            where: { question: { questionID } },
+            where: { optionID },
         });
 
         return entity ? CareQuestionOptionsMapper.toDomain(entity) : null;
@@ -84,14 +84,5 @@ export class CareQuestionOptionsRelationalRepository
 
     async remove(id: CareQuestionOptions['id']): Promise<void> {
         await this.careQuestionOptionsRepository.delete(id);
-    }
-
-    async findOptionsByQuestionId(
-        questionID: CareQuestionOptions['questionID'],
-    ): Promise<CareQuestionOptions[]> {
-        const rawOptions = await this.careQuestionOptionsRepository.find({
-            where: { question: { questionID } },
-        });
-        return rawOptions.map(CareQuestionOptionsMapper.toDomain);
     }
 }

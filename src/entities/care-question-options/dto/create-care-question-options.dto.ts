@@ -1,7 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { CareQuestions } from '../../care-questions/domain/care-questions';
 
 export class CreateCareQuestionOptionsDto {
     @ApiProperty({ type: String })
@@ -9,8 +7,8 @@ export class CreateCareQuestionOptionsDto {
     @IsNotEmpty()
     option: string;
 
-    @ApiProperty({ type: CareQuestions['questionID'] })
-    @IsString()
+    @ApiProperty({ type: Number })
+    @IsNumber()
     @IsNotEmpty()
-    questionID: string;
+    optionID: number;
 }

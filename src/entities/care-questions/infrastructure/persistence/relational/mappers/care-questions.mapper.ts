@@ -1,3 +1,4 @@
+import { CareQuestionOptionsMapper } from '../../../../../care-question-options/infrastructure/persistence/relational/mappers/care-question-options.mapper';
 import { CareQuestions } from '../../../../domain/care-questions';
 import { CareQuestionsEntity } from '../entities/care-questions.entity';
 
@@ -14,6 +15,8 @@ export class CareQuestionsMapper {
         domainEntity.options = raw.options;
         domainEntity.constraints = raw.constraints;
         domainEntity.dependentOn = raw.dependentOn;
+        domainEntity.options = raw.options;
+        domainEntity.careStatus = raw.careStatus;
 
         return domainEntity;
     }
@@ -29,6 +32,8 @@ export class CareQuestionsMapper {
         persistenceEntity.type = domainEntity.type;
         persistenceEntity.constraints = domainEntity.constraints;
         persistenceEntity.dependentOn = domainEntity.dependentOn;
+        persistenceEntity.options = domainEntity.options ? domainEntity.options : [];
+        persistenceEntity.careStatus = domainEntity.careStatus;
         if (domainEntity.options) {
             persistenceEntity.options = domainEntity.options;
         }

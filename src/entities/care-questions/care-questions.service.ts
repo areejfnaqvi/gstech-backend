@@ -36,6 +36,10 @@ export class CareQuestionsService {
         return this.careQuestionsRepository.findByID(id);
     }
 
+    findByCareStatus(careStatus: CareQuestions['careStatus']) {
+        return this.careQuestionsRepository.findByCareStatus(careStatus);
+    }
+
     update(
         questionID: CareQuestions['questionID'],
         updateCareQuestionsDto: UpdateCareQuestionsDto,
@@ -46,7 +50,7 @@ export class CareQuestionsService {
         );
     }
 
-    remove(questionID: CareQuestions['questionID']) {
-        return this.careQuestionsRepository.remove(questionID);
+    remove(id: CareQuestions['id']) {
+        return this.careQuestionsRepository.remove(id);
     }
 }

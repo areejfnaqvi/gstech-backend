@@ -18,8 +18,8 @@ export abstract class CareQuestionOptionsRepository {
         id: CareQuestionOptions['id'],
     ): Promise<NullableType<CareQuestionOptions>>;
 
-    abstract findByQuestionId(
-        questionID: CareQuestionOptions['questionID'],
+    abstract findByOptionID(
+        questionID: CareQuestionOptions['optionID'],
     ): Promise<NullableType<CareQuestionOptions>>;
 
     abstract update(
@@ -28,8 +28,4 @@ export abstract class CareQuestionOptionsRepository {
     ): Promise<CareQuestionOptions | null>;
 
     abstract remove(id: CareQuestionOptions['id']): Promise<void>;
-
-    abstract findOptionsByQuestionId(
-        questionId: CareQuestionOptions['questionID'],
-    ): Promise<CareQuestionOptions[]>;
 }

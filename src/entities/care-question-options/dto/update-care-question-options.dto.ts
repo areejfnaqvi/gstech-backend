@@ -1,7 +1,6 @@
 import { ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { CreateCareQuestionOptionsDto } from './create-care-question-options.dto';
-import { IsOptional, IsString } from 'class-validator';
-import { CareQuestions } from '../../care-questions/domain/care-questions';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateCareQuestionOptionsDto extends PartialType(
     CreateCareQuestionOptionsDto,
@@ -11,8 +10,8 @@ export class UpdateCareQuestionOptionsDto extends PartialType(
     @IsOptional()
     option?: string;
 
-    @ApiPropertyOptional({ type: CareQuestions['questionID'] })
-    @IsString()
+    @ApiPropertyOptional({ type: Number })
+    @IsNumber()
     @IsOptional()
-    questionID?: string;
+    optionID?: number;
 }

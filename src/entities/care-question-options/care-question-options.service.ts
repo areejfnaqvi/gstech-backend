@@ -34,8 +34,8 @@ export class CareQuestionOptionsService {
         return this.careQuestionOptionsRepository.findById(id);
     }
 
-    findByQuestionID(questionID: CareQuestionOptions['questionID']) {
-        return this.careQuestionOptionsRepository.findByQuestionId(questionID);
+    findByOptionID(optionID: CareQuestionOptions['optionID']) {
+        return this.careQuestionOptionsRepository.findByOptionID(optionID);
     }
 
     update(
@@ -50,11 +50,5 @@ export class CareQuestionOptionsService {
 
     remove(id: CareQuestionOptions['id']) {
         return this.careQuestionOptionsRepository.remove(id);
-    }
-
-    findOptionsByQuestionID(questionID: CareQuestionOptions['questionID']) {
-        return this.careQuestionOptionsRepository.findOptionsByQuestionId(
-            questionID,
-        );
     }
 }

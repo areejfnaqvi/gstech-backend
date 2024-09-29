@@ -19,8 +19,8 @@ export abstract class CareQuestionOptionsRepository {
     ): Promise<NullableType<CareQuestionOptions>>;
 
     abstract findByOptionID(
-        questionID: CareQuestionOptions['optionID'],
-    ): Promise<NullableType<CareQuestionOptions>>;
+        optionID: CareQuestionOptions['optionID'],
+    ): Promise<NullableType<CareQuestionOptions[]>>;
 
     abstract update(
         id: CareQuestionOptions['id'],

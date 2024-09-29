@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCareQuestionsDto } from './dto/create-care-questions.dto';
 import { UpdateCareQuestionsDto } from './dto/update-care-questions.dto';
 import { CareQuestionsRepository } from './infrastructure/persistence/care-questions.repository';
 import { IPaginationOptions } from '../../utils/types/pagination-options';
 import { CareQuestions } from './domain/care-questions';
+import { AddOptionsToQuestionDto } from './dto/add-options-to-question.dto';
+import { CareQuestionOptionsService } from '../care-question-options/care-question-options.service';
 
 @Injectable()
 export class CareQuestionsService {
     constructor(
-        private readonly careQuestionsRepository: CareQuestionsRepository,
+        // @Inject(CareQuestionOptionsService)
+        private readonly careQuestionsRepository: CareQuestionsRepository, private readonly careQuestionOptionsService: CareQuestionOptionsService
     ) {}
 
     create(createCareQuestionsDto: CreateCareQuestionsDto) {
@@ -53,4 +56,24 @@ export class CareQuestionsService {
     remove(id: CareQuestions['id']) {
         return this.careQuestionsRepository.remove(id);
     }
+
+    async addOptionsToQuestion(addOptionsDto: AddOptionsToQuestionDto) {
+        const { questionID, optionID } = addOptionsDto;
+
+        const question = await this.findByQuestionID(questionID);
+    
+        if (!question) {
+            throw new Error('Question not found');
+        }
+        const newOptions = await this.careQuestionOptionsService.findByOptionID(optionID[0]);
+    
+        question.options = newOptions ? [...newOptions] : [];
+
+        await this.careQuestionsRepository.update(questionID, {
+            options: question.options,
+        });
+    
+        return this.findByQuestionID(questionID);
+    }
+    
 }

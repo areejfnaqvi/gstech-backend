@@ -50,12 +50,12 @@ export class CareQuestionOptionsRelationalRepository
 
     async findByOptionID(
         optionID: CareQuestionOptions['optionID'],
-    ): Promise<NullableType<CareQuestionOptions>> {
-        const entity = await this.careQuestionOptionsRepository.findOne({
+    ): Promise<NullableType<CareQuestionOptions[]>> {
+        const entities = await this.careQuestionOptionsRepository.find({
             where: { optionID },
         });
 
-        return entity ? CareQuestionOptionsMapper.toDomain(entity) : null;
+        return entities.map((entity) => CareQuestionOptionsMapper.toDomain(entity));
     }
 
     async update(

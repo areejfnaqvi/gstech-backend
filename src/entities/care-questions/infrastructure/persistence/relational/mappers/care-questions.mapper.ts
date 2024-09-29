@@ -32,11 +32,12 @@ export class CareQuestionsMapper {
         persistenceEntity.type = domainEntity.type;
         persistenceEntity.constraints = domainEntity.constraints;
         persistenceEntity.dependentOn = domainEntity.dependentOn;
-        persistenceEntity.options = domainEntity.options ? domainEntity.options : [];
+        persistenceEntity.options = domainEntity.options
+            ? domainEntity.options.map((option) =>
+                  CareQuestionOptionsMapper.toPersistence(option),
+              )
+            : [];
         persistenceEntity.careStatus = domainEntity.careStatus;
-        if (domainEntity.options) {
-            persistenceEntity.options = domainEntity.options;
-        }
 
         return persistenceEntity;
     }

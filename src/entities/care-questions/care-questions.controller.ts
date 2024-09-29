@@ -29,6 +29,7 @@ import {
 } from '../../utils/dto/infinity-pagination-response.dto';
 import { infinityPagination } from '../../utils/infinity-pagination';
 import { QueryAllCareQuestions } from './dto/query-care-questions.dto';
+import { AddOptionsToQuestionDto } from './dto/add-options-to-question.dto';
 
 @ApiTags('CareQuestions')
 @ApiBearerAuth()
@@ -136,14 +137,8 @@ export class CareQuestionsController {
         );
     }
 
-    @Delete(':id')
-    @ApiParam({
-        name: 'id',
-        type: String,
-        required: true,
-    })
-    @HttpCode(HttpStatus.NO_CONTENT)
-    remove(@Param('id') id: CareQuestions['id']) {
-        return this.careQuestionsService.remove(id);
+    @Post('add-options')
+    async addOptionsToQuestion(@Body() addOptionsDto: AddOptionsToQuestionDto) {
+        return this.careQuestionsService.addOptionsToQuestion(addOptionsDto);
     }
 }

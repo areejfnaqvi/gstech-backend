@@ -33,6 +33,7 @@ export class CareQuestionsRelationalRepository
         const entities = await this.careQuestionsRepository.find({
             skip: (paginationOptions.page - 1) * paginationOptions.limit,
             take: paginationOptions.limit,
+            relations: ['options']
         });
 
         return entities.map((user) => CareQuestionsMapper.toDomain(user));

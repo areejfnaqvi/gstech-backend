@@ -22,6 +22,7 @@ export class CareQuestionOptionsMapper {
         if (domainEntity.id) {
             persistenceEntity.id = domainEntity.id;
         }
+        persistenceEntity.optionID = domainEntity.optionID;
         persistenceEntity.createdAt = domainEntity.createdAt;
         persistenceEntity.updatedAt = domainEntity.updatedAt;
         persistenceEntity.questions = domainEntity.questions ? domainEntity.questions : [];

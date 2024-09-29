@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { CareQuestionOptionsEntity } from '../../care-question-options/infrastructure/persistence/relational/entities/care-question-options.entity';
+import { CareQuestionOptions } from '../../care-question-options/domain/care-question-options';
 
 export enum QuestionType {
     TEXT = 'text',
@@ -49,11 +49,11 @@ export class CareQuestions {
     parentBlock?: string;
 
     @ApiPropertyOptional({
-        type: () => CareQuestionOptionsEntity,
+        type: () => CareQuestionOptions,
         isArray: true,
         nullable: true,
     })
-    options?: CareQuestionOptionsEntity[] | null;
+    options?: CareQuestionOptions[] | null;
 
     @ApiPropertyOptional({
         type: () => 'jsonb',

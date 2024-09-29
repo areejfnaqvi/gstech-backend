@@ -76,6 +76,7 @@ export class CareQuestionsEntity extends EntityRelationalHelper {
     dependentOn?: 'jsonb';
 
     @ApiPropertyOptional({ type: String, example: "CARE Process Initiation Period" })
+    @Column({ nullable: true })
     @IsOptional()
     careStatus?: string;
 

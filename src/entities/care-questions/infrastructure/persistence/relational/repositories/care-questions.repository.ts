@@ -44,6 +44,7 @@ export class CareQuestionsRelationalRepository
     ): Promise<NullableType<CareQuestions>> {
         const entity = await this.careQuestionsRepository.findOne({
             where: { questionID },
+            relations: ['options']
         });
 
         return entity ? CareQuestionsMapper.toDomain(entity) : null;
@@ -54,6 +55,7 @@ export class CareQuestionsRelationalRepository
     ): Promise<NullableType<CareQuestions[]>> {
         return await this.careQuestionsRepository.find({
             where: { careStatus },
+            relations: ['options']
         });
     }
 
@@ -62,6 +64,7 @@ export class CareQuestionsRelationalRepository
     ): Promise<NullableType<CareQuestions>> {
         const entity = await this.careQuestionsRepository.findOne({
             where: { id },
+            relations: ['options']
         });
 
         return entity ? CareQuestionsMapper.toDomain(entity) : null;

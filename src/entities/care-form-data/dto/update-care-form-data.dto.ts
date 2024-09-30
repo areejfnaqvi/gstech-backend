@@ -67,20 +67,17 @@ export class UpdateCareFormDataDto extends PartialType(CreateCareFormDataDto) {
     @IsString()
     '3.4.1'?: string;
 
-    @ApiPropertyOptional({ type: String })
+    @ApiPropertyOptional()
     @IsOptional()
-    @IsString()
-    '3.4.2'?: string;
+    '3.4.2'?: any[];
 
-    @ApiPropertyOptional({ type: String })
+    @ApiPropertyOptional()
     @IsOptional()
-    @IsString()
-    '3.4.3'?: string;
+    '3.4.3'?: any[];
 
-    @ApiPropertyOptional({ type: String })
+    @ApiPropertyOptional()
     @IsOptional()
-    @IsString()
-    '3.4.6'?: string;
+    '3.4.6'?: any[];
 
     @ApiPropertyOptional({ type: String })
     @IsOptional()

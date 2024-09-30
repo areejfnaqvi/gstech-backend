@@ -68,17 +68,17 @@ export class CareFormDataEntity extends EntityRelationalHelper {
     @Column({ type: String, nullable: true })
     '3.4.1': string;
 
-    @ApiProperty({ type: String })
-    @Column({ type: String, nullable: true })
-    '3.4.2': string;
+    @ApiProperty()
+    @Column( "text", { array: true, nullable: true })
+    '3.4.2': any[];
 
-    @ApiProperty({ type: String })
-    @Column({ type: String, nullable: true })
-    '3.4.3': string;
+    @ApiProperty()
+    @Column( "text", { array: true, nullable: true })
+    '3.4.3': any[];
 
-    @ApiProperty({ type: String })
-    @Column({ type: String, nullable: true })
-    '3.4.6': string;
+    @ApiProperty()
+    @Column( "text", { array: true, nullable: true })
+    '3.4.6': any[];
 
     @ApiProperty({ type: String })
     @Column({ type: String, nullable: true })

@@ -46,14 +46,14 @@ export class CareFormData {
     @ApiProperty({ type: String })
     '3.4.1': string;
 
-    @ApiProperty({ type: String })
-    '3.4.2': string;
+    @ApiProperty()
+    '3.4.2': any[];
 
-    @ApiProperty({ type: String })
-    '3.4.3': string;
+    @ApiProperty()
+    '3.4.3': any[];
 
-    @ApiProperty({ type: String })
-    '3.4.6': string;
+    @ApiProperty()
+    '3.4.6': any[];
 
     @ApiProperty({ type: String })
     '3.4.7': string;

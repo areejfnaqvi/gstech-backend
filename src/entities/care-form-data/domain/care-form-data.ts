@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 
 export class CareFormData {
     [key: string]: any;
@@ -35,9 +36,11 @@ export class CareFormData {
     '3.3.6': number;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.3.7': Date;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.3.8': Date;
 
     @ApiProperty({ type: String })
@@ -131,6 +134,7 @@ export class CareFormData {
     '3.11.5': boolean;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.11.6': Date;
 
     @ApiProperty({ type: Number })
@@ -140,6 +144,7 @@ export class CareFormData {
     '3.13.2': number;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.3.11': Date;
 
     @ApiProperty({ type: String })
@@ -197,6 +202,7 @@ export class CareFormData {
     '3.10.1': boolean;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.10.2': Date;
 
     @ApiProperty({ type: String })
@@ -242,6 +248,7 @@ export class CareFormData {
     '3.5.20': string;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.12.1': Date;
 
     @ApiProperty({ type: Boolean })
@@ -254,12 +261,15 @@ export class CareFormData {
     '3.12.6': string;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.12.2': Date;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.12.3': Date;
 
     @ApiProperty({ type: Date })
+    @Type(() => Date)
     '3.3.12': Date;
 
     @ApiProperty({ type: String })

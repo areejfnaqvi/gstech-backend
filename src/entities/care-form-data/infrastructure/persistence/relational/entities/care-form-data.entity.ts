@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { EntityRelationalHelper } from '../../../../../../utils/relational-entity-helper';
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 
 @Entity({
     name: 'care_form_data',
@@ -54,10 +55,12 @@ export class CareFormDataEntity extends EntityRelationalHelper {
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.3.7': Date;
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.3.8': Date;
 
     @ApiProperty({ type: String })
@@ -182,6 +185,7 @@ export class CareFormDataEntity extends EntityRelationalHelper {
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.11.6': Date;
 
     @ApiProperty({ type: Number })
@@ -194,6 +198,7 @@ export class CareFormDataEntity extends EntityRelationalHelper {
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.3.11': Date;
 
     @ApiProperty({ type: String })
@@ -270,6 +275,7 @@ export class CareFormDataEntity extends EntityRelationalHelper {
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.10.2': Date;
 
     @ApiProperty({ type: String })
@@ -330,6 +336,7 @@ export class CareFormDataEntity extends EntityRelationalHelper {
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.12.1': Date;
 
     @ApiProperty({ type: Boolean })
@@ -346,14 +353,17 @@ export class CareFormDataEntity extends EntityRelationalHelper {
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.12.2': Date;
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.12.3': Date;
 
     @ApiProperty({ type: Date })
     @Column({ type: Date, nullable: true })
+    @Type(() => Date)
     '3.3.12': Date;
 
     @ApiProperty({ type: String })
